@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "pnpm --filter @little-cloud/web dev",
     "build": "lerna run build",
+    "deploy": "bash scripts/deploy.sh",
     "test": "lerna run test",
     "lint": "lerna run lint"
   },
