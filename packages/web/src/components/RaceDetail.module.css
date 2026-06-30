@@ -1,0 +1,113 @@
+.detail {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+  min-height: 100px;
+  animation: fadeSlideUp 0.3s ease-out;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.badgeHuxiao {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--huxiao);
+  background: var(--huxiao-soft);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.badgeHulong {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--hulong);
+  background: var(--hulong-soft);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.raceBadge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-hover);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.star {
+  color: var(--huxiao);
+  margin-right: 4px;
+}
+
+.date {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.replay {
+  margin-top: 4px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 0;
+}
+
+.emoji {
+  font-size: 2rem;
+  line-height: 1;
+  animation: emojiBounce 2s ease-in-out infinite;
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 600;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes emojiBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}

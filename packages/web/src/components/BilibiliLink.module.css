@@ -1,0 +1,25 @@
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, var(--bilibili) 0%, #ff85ad 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(251, 114, 153, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.link:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(251, 114, 153, 0.25);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
