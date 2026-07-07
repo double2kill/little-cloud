@@ -1,3 +1,24 @@
+body.theme-crystal {
+  --bg-start: #faf9fe;
+  --bg-end: #d8d2f7;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-hover: rgba(255, 255, 255, 0.78);
+  --text: #4d4670;
+  --text-muted: #7a7399;
+  --border: rgba(132, 120, 217, 0.28);
+  --glass-border: rgba(132, 120, 217, 0.22);
+  --shadow-soft: 0 8px 32px rgba(168, 155, 232, 0.15);
+  --huxiao: #a89be8;
+  --huxiao-soft: rgba(168, 155, 232, 0.22);
+  --hulong: #8478d9;
+  --hulong-soft: rgba(216, 210, 247, 0.65);
+  --title-gradient-start: #4d4670;
+  --title-gradient-end: #a89be8;
+  --selected-shadow: rgba(168, 155, 232, 0.3);
+  --glow-primary: rgba(168, 155, 232, 0.28);
+  --glow-secondary: rgba(216, 210, 247, 0.55);
+}
+
 body.theme-crystal::before {
   background: radial-gradient(
     circle,

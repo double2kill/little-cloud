@@ -8,6 +8,9 @@ export const CRYSTAL_FAVICON_URL = "/crystal-favicon.webp";
 
 export const THEME_CLASS_CRYSTAL = "theme-crystal";
 
+export const CRYSTAL_COLOR_PRIMARY = "#A89BE8";
+export const CRYSTAL_COLOR_ACCENT_LIGHT = "#D8D2F7";
+
 export const crystalConfig: CharacterConfig = {
   id: CHARACTER_ID_CRYSTAL,
   pageTitle: "小水晶 小日历",
@@ -20,5 +23,4 @@ export const crystalConfig: CharacterConfig = {
   logoUrl,
   faviconUrl: CRYSTAL_FAVICON_URL,
   schedule: crystalSchedule,
-  supportsPaletteSwitcher: true,
 };

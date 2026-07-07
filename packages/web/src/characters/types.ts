@@ -12,5 +12,4 @@ export interface CharacterConfig {
   logoUrl: string;
   faviconUrl?: string;
   schedule: ScheduleData;
-  supportsPaletteSwitcher?: boolean;
 }

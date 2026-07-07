@@ -5,8 +5,6 @@ import { describe, expect, it } from "vitest";
 import { App, ROUTE_PATH_CRYSTAL, ROUTE_PATH_LANI } from "./App";
 import { laniConfig } from "./characters/lani";
 import { crystalConfig, CRYSTAL_FAVICON_URL } from "./characters/crystal";
-import { CRYSTAL_PALETTE_ID } from "./characters/crystal-palettes";
-import { PALETTE_SWITCHER_LABEL } from "./components/CrystalPaletteSwitcher";
 import {
   HOME_PAGE_TITLE,
   HUXIAO_SERIES_LABEL,
@@ -83,18 +81,6 @@ describe("App", () => {
     );
   });
 
-  it("should render palette switcher when mounted at crystal route", () => {
-    renderAt(ROUTE_PATH_CRYSTAL);
-    expect(
-      screen.getByRole("radiogroup", { name: PALETTE_SWITCHER_LABEL }),
-    ).toBeInTheDocument();
-  });
-
-  it("should apply crystal blue palette when mounted at crystal route", () => {
-    renderAt(ROUTE_PATH_CRYSTAL);
-    expect(document.body.style.getPropertyValue("--huxiao")).toBe("#7FC9E8");
-  });
-
   it("should set crystal favicon when mounted at crystal route", () => {
     renderAt(ROUTE_PATH_CRYSTAL);
     expect(
@@ -102,16 +88,5 @@ describe("App", () => {
         "href",
       ),
     ).toBe(CRYSTAL_FAVICON_URL);
-  });
-
-  it("should switch palette when crystal palette option clicked", async () => {
-    const user = userEvent.setup();
-    renderAt(ROUTE_PATH_CRYSTAL);
-
-    await user.click(screen.getByRole("radio", { name: "🌹 暖玫瑰" }));
-    expect(document.body.style.getPropertyValue("--huxiao")).toBe("#D98B8B");
-    expect(localStorage.getItem("crystal-palette-id")).toBe(
-      CRYSTAL_PALETTE_ID.WARM_ROSE,
-    );
   });
 });

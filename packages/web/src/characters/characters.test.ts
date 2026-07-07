@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { crystalConfig, CHARACTER_ID_CRYSTAL, CRYSTAL_FAVICON_URL, THEME_CLASS_CRYSTAL } from "./crystal";
+import {
+  crystalConfig,
+  CHARACTER_ID_CRYSTAL,
+  CRYSTAL_COLOR_PRIMARY,
+  CRYSTAL_FAVICON_URL,
+  THEME_CLASS_CRYSTAL,
+} from "./crystal";
 import { laniConfig } from "./lani";
 import { THEME_CLASS_LANI } from "./lani";
 
@@ -18,15 +24,15 @@ describe("crystalConfig", () => {
     expect(crystalConfig.pageTitle).toBe("小水晶 小日历");
   });
 
-  it("should enable palette switcher when config created", () => {
-    expect(crystalConfig.supportsPaletteSwitcher).toBe(true);
-  });
-
   it("should use crystal character id when config created", () => {
     expect(crystalConfig.id).toBe(CHARACTER_ID_CRYSTAL);
   });
 
   it("should set crystal favicon url when config created", () => {
     expect(crystalConfig.faviconUrl).toBe(CRYSTAL_FAVICON_URL);
+  });
+
+  it("should use moonlight lilac primary color when config created", () => {
+    expect(CRYSTAL_COLOR_PRIMARY).toBe("#A89BE8");
   });
 });
