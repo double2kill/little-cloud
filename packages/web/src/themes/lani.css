@@ -1,0 +1,29 @@
+body.theme-lani {
+  --bg-start: #fff5f7;
+  --bg-end: #f0f4ff;
+  --shadow-soft: 0 8px 32px rgba(255, 107, 138, 0.12);
+  --huxiao: #ff6b8a;
+  --huxiao-soft: rgba(255, 107, 138, 0.15);
+  --hulong: #6bc5e8;
+  --hulong-soft: rgba(107, 197, 232, 0.15);
+  --title-gradient-start: #ff6b8a;
+  --title-gradient-end: #ff8fa8;
+  --glow-primary: rgba(255, 107, 138, 0.2);
+  --glow-secondary: rgba(107, 197, 232, 0.18);
+}
+
+body.theme-lani::before {
+  background: radial-gradient(
+    circle,
+    var(--glow-primary) 0%,
+    transparent 70%
+  );
+}
+
+body.theme-lani::after {
+  background: radial-gradient(
+    circle,
+    var(--glow-secondary) 0%,
+    transparent 70%
+  );
+}

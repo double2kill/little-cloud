@@ -1,13 +1,14 @@
 import { RACE_SERIES, type RaceEvent } from "@little-cloud/data";
 import { BilibiliLink } from "./BilibiliLink";
 import styles from "./RaceDetail.module.css";
+import { useCharacter } from "../characters/CharacterContext";
 import {
   EMPTY_STATE_EMOJI,
   HULONG_SERIES_LABEL,
+  HUASHAN_SERIES_LABEL,
   HUXIAO_SERIES_LABEL,
   HUXIAO_STAR_MARK,
   NO_RACE_EMOJI,
-  NO_RACE_HINT,
   RACE_DAY_LABEL,
   REPLAY_LINK_LABEL,
   SELECT_DATE_HINT,
@@ -19,6 +20,8 @@ interface RaceDetailProps {
 }
 
 export function RaceDetail({ selectedDate, race }: RaceDetailProps) {
+  const { noRaceHint } = useCharacter();
+
   if (!selectedDate) {
     return (
       <section className={styles.detail}>
@@ -40,16 +43,19 @@ export function RaceDetail({ selectedDate, race }: RaceDetailProps) {
             {NO_RACE_EMOJI}
           </span>
           <p className={styles.date}>{selectedDate}</p>
-          <p className={styles.hint}>{NO_RACE_HINT}</p>
+          <p className={styles.hint}>{noRaceHint}</p>
         </div>
       </section>
     );
   }
 
   const isHuxiao = race.series === RACE_SERIES.HUXIAO;
+  const isHuashan = race.series === RACE_SERIES.HUASHAN;
   const seriesLabel = isHuxiao
     ? `${HUXIAO_STAR_MARK} ${HUXIAO_SERIES_LABEL}`
-    : HULONG_SERIES_LABEL;
+    : isHuashan
+      ? HUASHAN_SERIES_LABEL
+      : HULONG_SERIES_LABEL;
   const seriesBadgeClass = isHuxiao ? styles.badgeHuxiao : styles.badgeHulong;
 
   return (

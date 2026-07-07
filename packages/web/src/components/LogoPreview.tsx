@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LOGO_ALT, LOGO_CLOSE_LABEL, LOGO_VIEW_LABEL } from "../constants";
+import { useCharacter } from "../characters/CharacterContext";
 import styles from "./LogoPreview.module.css";
 
 interface LogoPreviewProps {
@@ -7,6 +7,7 @@ interface LogoPreviewProps {
 }
 
 export function LogoPreview({ src }: LogoPreviewProps) {
+  const { logoAlt, logoViewLabel, logoCloseLabel } = useCharacter();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export function LogoPreview({ src }: LogoPreviewProps) {
         type="button"
         className={styles.trigger}
         onClick={() => setOpen(true)}
-        aria-label={LOGO_VIEW_LABEL}
+        aria-label={logoViewLabel}
       >
         <img className={styles.logo} src={src} alt="" aria-hidden="true" />
       </button>
@@ -44,13 +45,13 @@ export function LogoPreview({ src }: LogoPreviewProps) {
           className={styles.overlay}
           role="dialog"
           aria-modal="true"
-          aria-label={LOGO_VIEW_LABEL}
+          aria-label={logoViewLabel}
           onClick={handleClose}
         >
           <button
             type="button"
             className={styles.closeBtn}
-            aria-label={LOGO_CLOSE_LABEL}
+            aria-label={logoCloseLabel}
             onClick={handleClose}
           >
             ×
@@ -58,7 +59,7 @@ export function LogoPreview({ src }: LogoPreviewProps) {
           <img
             className={styles.preview}
             src={src}
-            alt={LOGO_ALT}
+            alt={logoAlt}
             onClick={(event) => event.stopPropagation()}
           />
         </div>

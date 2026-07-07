@@ -107,10 +107,14 @@
 }
 
 .selected {
-  background: linear-gradient(135deg, var(--huxiao) 0%, #ff8fa8 100%);
+  background: linear-gradient(
+    135deg,
+    var(--huxiao) 0%,
+    var(--title-gradient-end) 100%
+  );
   color: #fff;
   transform: scale(1.08);
-  box-shadow: 0 4px 12px rgba(255, 107, 138, 0.25);
+  box-shadow: 0 4px 12px var(--selected-shadow, rgba(255, 107, 138, 0.25));
   z-index: 1;
 }
 

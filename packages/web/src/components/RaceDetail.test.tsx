@@ -2,10 +2,12 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { RACE_SERIES, type RaceEvent } from "@little-cloud/data";
 import { RaceDetail } from "./RaceDetail";
+import { CharacterProvider } from "../characters/CharacterContext";
+import { laniConfig } from "../characters/lani";
+import { crystalConfig } from "../characters/crystal";
 import {
   HULONG_SERIES_LABEL,
   HUXIAO_SERIES_LABEL,
-  NO_RACE_HINT,
   REPLAY_LINK_LABEL,
   SELECT_DATE_HINT,
 } from "../constants";
@@ -24,29 +26,48 @@ const hulongFixture: RaceEvent = {
   series: RACE_SERIES.HULONG,
 };
 
+function renderRaceDetail(
+  props: React.ComponentProps<typeof RaceDetail>,
+  config = laniConfig,
+) {
+  return render(
+    <CharacterProvider config={config}>
+      <RaceDetail {...props} />
+    </CharacterProvider>,
+  );
+}
+
 describe("RaceDetail", () => {
   it("should show hint when no date selected", () => {
-    render(<RaceDetail selectedDate={null} race={undefined} />);
+    renderRaceDetail({ selectedDate: null, race: undefined });
     expect(screen.getByText(SELECT_DATE_HINT)).toBeInTheDocument();
   });
 
   it("should show no race hint when date has no race", () => {
-    render(<RaceDetail selectedDate="2026-01-01" race={undefined} />);
-    expect(screen.getByText(NO_RACE_HINT)).toBeInTheDocument();
+    renderRaceDetail({ selectedDate: "2026-01-01", race: undefined });
+    expect(screen.getByText(laniConfig.noRaceHint)).toBeInTheDocument();
+  });
+
+  it("should show crystal no race hint when crystal config used", () => {
+    renderRaceDetail(
+      { selectedDate: "2026-01-01", race: undefined },
+      crystalConfig,
+    );
+    expect(screen.getByText(crystalConfig.noRaceHint)).toBeInTheDocument();
   });
 
   it("should show huxiao badge when race is huxiao series", () => {
-    render(<RaceDetail selectedDate="2026-06-20" race={huxiaoFixture} />);
+    renderRaceDetail({ selectedDate: "2026-06-20", race: huxiaoFixture });
     expect(screen.getByText(`★ ${HUXIAO_SERIES_LABEL}`)).toBeInTheDocument();
   });
 
   it("should show hulong badge when race is hulong series", () => {
-    render(<RaceDetail selectedDate="2026-06-07" race={hulongFixture} />);
+    renderRaceDetail({ selectedDate: "2026-06-07", race: hulongFixture });
     expect(screen.getByText(HULONG_SERIES_LABEL)).toBeInTheDocument();
   });
 
   it("should show replay link when race selected", () => {
-    render(<RaceDetail selectedDate="2026-06-20" race={huxiaoFixture} />);
+    renderRaceDetail({ selectedDate: "2026-06-20", race: huxiaoFixture });
     const link = screen.getByRole("link", { name: REPLAY_LINK_LABEL });
     expect(link).toHaveAttribute("href", "https://b23.tv/kM7pjYZ");
     expect(link).toHaveAttribute("target", "_blank");

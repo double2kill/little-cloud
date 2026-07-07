@@ -1,25 +1,29 @@
-.app {
+.home {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  padding: 16px;
-  padding-bottom: calc(16px + var(--safe-bottom));
-  gap: 16px;
+  padding: 24px 16px;
+  padding-bottom: calc(24px + var(--safe-bottom));
+  gap: 24px;
 }
 
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 8px 0 4px;
+  gap: 8px;
+  padding: 16px 0 8px;
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 800;
   text-align: center;
-  background: linear-gradient(135deg, var(--huxiao) 0%, #ff8fa8 100%);
+  background: linear-gradient(
+    135deg,
+    var(--title-gradient-start) 0%,
+    var(--title-gradient-end) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -32,8 +36,7 @@
   text-align: center;
 }
 
-.main {
-  flex: 1;
+.cards {
   display: flex;
   flex-direction: column;
   gap: 16px;

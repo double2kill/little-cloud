@@ -13,8 +13,11 @@ export interface ScheduleData {
 
 export { RACE_SERIES, type RaceSeries } from "./constants";
 import scheduleJson from "./schedule.json";
+import crystalScheduleJson from "./crystal-schedule.json";
 
 export const schedule = scheduleJson as ScheduleData;
+
+export const crystalSchedule = crystalScheduleJson as ScheduleData;
 
 export function getRacesByMonth(
   data: ScheduleData,
