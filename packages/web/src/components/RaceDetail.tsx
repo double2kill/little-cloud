@@ -16,10 +16,52 @@ import {
 
 interface RaceDetailProps {
   selectedDate: string | null;
-  race: RaceEvent | undefined;
+  races: RaceEvent[];
 }
 
-export function RaceDetail({ selectedDate, race }: RaceDetailProps) {
+function getSeriesLabel(series: RaceEvent["series"]): string {
+  if (series === RACE_SERIES.HUXIAO) {
+    return `${HUXIAO_STAR_MARK} ${HUXIAO_SERIES_LABEL}`;
+  }
+  if (series === RACE_SERIES.HUASHAN) {
+    return HUASHAN_SERIES_LABEL;
+  }
+  return HULONG_SERIES_LABEL;
+}
+
+function getSeriesBadgeClass(series: RaceEvent["series"]): string {
+  return series === RACE_SERIES.HUXIAO
+    ? styles.badgeHuxiao
+    : styles.badgeHulong;
+}
+
+function RaceItem({ race }: { race: RaceEvent }) {
+  const isHuxiao = race.series === RACE_SERIES.HUXIAO;
+
+  return (
+    <article className={styles.raceItem}>
+      <div className={styles.badges}>
+        <span className={getSeriesBadgeClass(race.series)}>
+          {getSeriesLabel(race.series)}
+        </span>
+        <span className={styles.raceBadge}>{RACE_DAY_LABEL}</span>
+      </div>
+      <h3 className={styles.title}>
+        {isHuxiao && (
+          <span className={styles.star} aria-hidden="true">
+            {HUXIAO_STAR_MARK}
+          </span>
+        )}
+        {race.title}
+      </h3>
+      <div className={styles.replay}>
+        <BilibiliLink url={race.replayUrl} label={REPLAY_LINK_LABEL} />
+      </div>
+    </article>
+  );
+}
+
+export function RaceDetail({ selectedDate, races }: RaceDetailProps) {
   const { noRaceHint } = useCharacter();
 
   if (!selectedDate) {
@@ -35,7 +77,7 @@ export function RaceDetail({ selectedDate, race }: RaceDetailProps) {
     );
   }
 
-  if (!race) {
+  if (races.length === 0) {
     return (
       <section className={styles.detail}>
         <div className={styles.emptyState}>
@@ -49,32 +91,13 @@ export function RaceDetail({ selectedDate, race }: RaceDetailProps) {
     );
   }
 
-  const isHuxiao = race.series === RACE_SERIES.HUXIAO;
-  const isHuashan = race.series === RACE_SERIES.HUASHAN;
-  const seriesLabel = isHuxiao
-    ? `${HUXIAO_STAR_MARK} ${HUXIAO_SERIES_LABEL}`
-    : isHuashan
-      ? HUASHAN_SERIES_LABEL
-      : HULONG_SERIES_LABEL;
-  const seriesBadgeClass = isHuxiao ? styles.badgeHuxiao : styles.badgeHulong;
-
   return (
     <section className={styles.detail}>
-      <div className={styles.badges}>
-        <span className={seriesBadgeClass}>{seriesLabel}</span>
-        <span className={styles.raceBadge}>{RACE_DAY_LABEL}</span>
-      </div>
-      <h3 className={styles.title}>
-        {isHuxiao && (
-          <span className={styles.star} aria-hidden="true">
-            {HUXIAO_STAR_MARK}
-          </span>
-        )}
-        {race.title}
-      </h3>
       <p className={styles.date}>{selectedDate}</p>
-      <div className={styles.replay}>
-        <BilibiliLink url={race.replayUrl} label={REPLAY_LINK_LABEL} />
+      <div className={styles.raceList}>
+        {races.map((race) => (
+          <RaceItem key={`${race.date}-${race.series}-${race.title}`} race={race} />
+        ))}
       </div>
     </section>
   );

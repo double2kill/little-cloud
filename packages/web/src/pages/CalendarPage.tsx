@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-  getRaceByDate,
-  getRaceSeriesByDate,
+  getRacesByDate,
+  getRaceSeriesListByDate,
 } from "@little-cloud/data";
 import { Calendar } from "../components/Calendar";
 import { LogoPreview } from "../components/LogoPreview";
@@ -44,19 +44,19 @@ function CalendarPageContent() {
     [debutDate],
   );
 
-  const raceSeriesByDate = useMemo(
-    () => getRaceSeriesByDate(schedule),
+  const raceSeriesListByDate = useMemo(
+    () => getRaceSeriesListByDate(schedule),
     [schedule],
   );
 
   const days = useMemo(
-    () => buildCalendarDays(year, month, raceSeriesByDate),
-    [year, month, raceSeriesByDate],
+    () => buildCalendarDays(year, month, raceSeriesListByDate),
+    [year, month, raceSeriesListByDate],
   );
 
-  const selectedRace = selectedDate
-    ? getRaceByDate(schedule, selectedDate)
-    : undefined;
+  const selectedRaces = selectedDate
+    ? getRacesByDate(schedule, selectedDate)
+    : [];
 
   const handlePrevMonth = () => {
     const next = shiftMonth(year, month, -1);
@@ -90,7 +90,7 @@ function CalendarPageContent() {
           onNextMonth={handleNextMonth}
           onSelectDate={setSelectedDate}
         />
-        <RaceDetail selectedDate={selectedDate} race={selectedRace} />
+        <RaceDetail selectedDate={selectedDate} races={selectedRaces} />
       </main>
     </div>
   );

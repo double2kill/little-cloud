@@ -66,6 +66,17 @@
   font-weight: 600;
 }
 
+.raceList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.raceItem {
+  display: flex;
+  flex-direction: column;
+}
+
 .replay {
   margin-top: 4px;
 }

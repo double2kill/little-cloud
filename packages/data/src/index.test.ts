@@ -4,10 +4,13 @@ import {
   getRaceByDate,
   getRaceDates,
   getRaceSeriesByDate,
+  getRaceSeriesListByDate,
+  getRacesByDate,
   getRacesByMonth,
   RACE_SERIES,
   type ScheduleData,
 } from "./index";
+import crystalSchedule from "./crystal-schedule.json";
 
 const fixture = schedule as ScheduleData;
 
@@ -54,10 +57,33 @@ describe("getRaceByDate", () => {
   });
 });
 
+describe("getRacesByDate", () => {
+  it("should return empty array when date has no race", () => {
+    expect(getRacesByDate(fixture, "2026-01-01")).toEqual([]);
+  });
+
+  it("should return matching races when date has races", () => {
+    const races = getRacesByDate(fixture, "2026-06-20");
+    expect(races).toHaveLength(1);
+    expect(races[0].series).toBe(RACE_SERIES.HUXIAO);
+  });
+});
+
 describe("getRaceSeriesByDate", () => {
   it("should map huxiao date to huxiao series when data loaded", () => {
     const seriesMap = getRaceSeriesByDate(fixture);
     expect(seriesMap.get("2026-06-20")).toBe(RACE_SERIES.HUXIAO);
     expect(seriesMap.get("2026-06-07")).toBe(RACE_SERIES.HULONG);
+  });
+});
+
+describe("getRaceSeriesListByDate", () => {
+  it("should return multiple series when crystal date has two races", () => {
+    const crystalFixture = crystalSchedule as ScheduleData;
+    const seriesListByDate = getRaceSeriesListByDate(crystalFixture);
+    expect(seriesListByDate.get("2026-07-05")).toEqual([
+      RACE_SERIES.HUXIAO,
+      RACE_SERIES.HULONG,
+    ]);
   });
 });

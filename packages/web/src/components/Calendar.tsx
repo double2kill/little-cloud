@@ -1,7 +1,14 @@
-import { RACE_SERIES } from "@little-cloud/data";
 import styles from "./Calendar.module.css";
-import { HUXIAO_STAR_MARK, WEEKDAY_LABELS } from "../constants";
-import type { CalendarDay } from "../utils/calendar";
+import {
+  formatRaceDayAriaLabel,
+  HUXIAO_STAR_MARK,
+  WEEKDAY_LABELS,
+} from "../constants";
+import {
+  hasHuxiaoSeries,
+  hasNonHuxiaoSeries,
+  type CalendarDay,
+} from "../utils/calendar";
 
 interface CalendarProps {
   year: number;
@@ -57,23 +64,20 @@ export function Calendar({
       <div className={styles.grid}>
         {days.map((day) => {
           const isSelected = selectedDate === day.date;
-          const isHuxiao = day.series === RACE_SERIES.HUXIAO;
+          const isHuxiao = hasHuxiaoSeries(day.seriesList);
+          const isNonHuxiao = hasNonHuxiaoSeries(day.seriesList);
+          const isMultiRace = day.seriesList.length > 1;
           const classNames = [
             styles.day,
             !day.isCurrentMonth && styles.otherMonth,
             day.isToday && styles.today,
-            isHuxiao && day.isRaceDay && styles.raceDayHuxiao,
-            !isHuxiao && day.isRaceDay && styles.raceDayHulong,
+            isMultiRace && styles.raceDayMulti,
+            !isMultiRace && isHuxiao && styles.raceDayHuxiao,
+            !isMultiRace && isNonHuxiao && styles.raceDayHulong,
             isSelected && styles.selected,
           ]
             .filter(Boolean)
             .join(" ");
-
-          const raceLabel = day.isRaceDay
-            ? isHuxiao
-              ? ` 沪小比赛日`
-              : " 比赛日"
-            : "";
 
           return (
             <button
@@ -81,18 +85,25 @@ export function Calendar({
               type="button"
               className={classNames}
               onClick={() => onSelectDate(day.date)}
-              aria-label={`${day.date}${raceLabel}`}
+              aria-label={formatRaceDayAriaLabel(
+                day.date,
+                day.seriesList,
+                isHuxiao,
+              )}
               aria-pressed={isSelected}
             >
               <span className={styles.dayNum}>{day.day}</span>
-              {day.isRaceDay &&
-                (isHuxiao ? (
-                  <span className={styles.star} aria-hidden="true">
-                    {HUXIAO_STAR_MARK}
-                  </span>
-                ) : (
-                  <span className={styles.dot} aria-hidden="true" />
-                ))}
+              {day.isRaceDay && (
+                <span className={styles.markers} aria-hidden="true">
+                  {isHuxiao && (
+                    <span className={styles.star}>{HUXIAO_STAR_MARK}</span>
+                  )}
+                  {isNonHuxiao && <span className={styles.dot} />}
+                  {isMultiRace && (
+                    <span className={styles.count}>{day.seriesList.length}</span>
+                  )}
+                </span>
+              )}
             </button>
           );
         })}

@@ -1,4 +1,8 @@
-import type { RaceSeries } from "./constants";
+import {
+  compareRaceSeries,
+  RACE_SERIES,
+  type RaceSeries,
+} from "./constants";
 
 export interface RaceEvent {
   date: string;
@@ -11,7 +15,12 @@ export interface ScheduleData {
   races: RaceEvent[];
 }
 
-export { RACE_SERIES, type RaceSeries } from "./constants";
+export {
+  compareRaceSeries,
+  RACE_SERIES,
+  RACE_SERIES_PRIORITY,
+  type RaceSeries,
+} from "./constants";
 import scheduleJson from "./schedule.json";
 import crystalScheduleJson from "./crystal-schedule.json";
 
@@ -32,15 +41,54 @@ export function getRaceDates(data: ScheduleData): Set<string> {
   return new Set(data.races.map((race) => race.date));
 }
 
+export function sortRacesBySeriesPriority(races: RaceEvent[]): RaceEvent[] {
+  return [...races].sort((left, right) =>
+    compareRaceSeries(left.series, right.series),
+  );
+}
+
 export function getRaceByDate(
   data: ScheduleData,
   date: string
 ): RaceEvent | undefined {
-  return data.races.find((race) => race.date === date);
+  return getRacesByDate(data, date)[0];
+}
+
+export function getRacesByDate(
+  data: ScheduleData,
+  date: string
+): RaceEvent[] {
+  return sortRacesBySeriesPriority(
+    data.races.filter((race) => race.date === date),
+  );
 }
 
 export function getRaceSeriesByDate(
   data: ScheduleData
 ): Map<string, RaceSeries> {
-  return new Map(data.races.map((race) => [race.date, race.series]));
+  const seriesByDate = new Map<string, RaceSeries>();
+  for (const [date, seriesList] of getRaceSeriesListByDate(data)) {
+    seriesByDate.set(date, seriesList[0]);
+  }
+  return seriesByDate;
+}
+
+export function getRaceSeriesListByDate(
+  data: ScheduleData
+): Map<string, RaceSeries[]> {
+  const seriesListByDate = new Map<string, RaceSeries[]>();
+  for (const race of data.races) {
+    const seriesList = seriesListByDate.get(race.date) ?? [];
+    if (!seriesList.includes(race.series)) {
+      seriesList.push(race.series);
+    }
+    seriesListByDate.set(race.date, seriesList);
+  }
+  for (const [date, seriesList] of seriesListByDate) {
+    seriesListByDate.set(
+      date,
+      [...seriesList].sort(compareRaceSeries),
+    );
+  }
+  return seriesListByDate;
 }

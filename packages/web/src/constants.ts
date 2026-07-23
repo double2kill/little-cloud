@@ -16,6 +16,24 @@ export const REPLAY_LINK_LABEL = "录屏回放";
 
 export const RACE_DAY_LABEL = "比赛日";
 
+export const HUXIAO_RACE_DAY_LABEL = "沪小比赛日";
+
+export const MULTI_RACE_DAY_SUFFIX = "场比赛日";
+
+export function formatRaceDayAriaLabel(
+  date: string,
+  seriesList: { length: number },
+  hasHuxiao: boolean,
+): string {
+  if (seriesList.length === 0) {
+    return date;
+  }
+  if (seriesList.length > 1) {
+    return `${date} ${seriesList.length}${MULTI_RACE_DAY_SUFFIX}`;
+  }
+  return hasHuxiao ? `${date} ${HUXIAO_RACE_DAY_LABEL}` : `${date} ${RACE_DAY_LABEL}`;
+}
+
 export const HUXIAO_SERIES_LABEL = "沪小";
 
 export const HULONG_SERIES_LABEL = "沪龙";
