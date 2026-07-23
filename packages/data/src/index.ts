@@ -1,6 +1,5 @@
 import {
   compareRaceSeries,
-  RACE_SERIES,
   type RaceSeries,
 } from "./constants";
 
