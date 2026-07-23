@@ -35,3 +35,11 @@ export const HOME_PAGE_TITLE = "小日历";
 export const HOME_PAGE_SUBTITLE = "选择查看赛程";
 
 export const HOME_CARD_ENTER_LABEL = "进入日历";
+
+export const BROADCAST_DAY_PREFIX = "开播第";
+
+export const BROADCAST_DAY_SUFFIX = "天";
+
+export function formatBroadcastDayLabel(day: number): string {
+  return `${BROADCAST_DAY_PREFIX} ${day} ${BROADCAST_DAY_SUFFIX}`;
+}

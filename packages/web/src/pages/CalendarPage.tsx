@@ -7,17 +7,19 @@ import { Calendar } from "../components/Calendar";
 import { LogoPreview } from "../components/LogoPreview";
 import { RaceDetail } from "../components/RaceDetail";
 import { buildCalendarDays, shiftMonth } from "../utils/calendar";
+import { getBroadcastDay } from "../utils/broadcast-day";
 import { CharacterProvider, useCharacter } from "../characters/CharacterContext";
 import type { CharacterConfig } from "../characters/types";
+import { formatBroadcastDayLabel } from "../constants";
 import { restoreFavicon, setFavicon } from "../utils/favicon";
 import styles from "./CalendarPage.module.css";
 
 function CalendarPageContent() {
   const {
     pageTitle,
-    pageSubtitle,
     logoUrl,
     faviconUrl,
+    debutDate,
     schedule,
     themeClass,
   } = useCharacter();
@@ -36,6 +38,11 @@ function CalendarPageContent() {
       restoreFavicon(previousFavicon);
     };
   }, [themeClass, pageTitle, faviconUrl]);
+
+  const broadcastDay = useMemo(
+    () => getBroadcastDay(debutDate),
+    [debutDate],
+  );
 
   const raceSeriesByDate = useMemo(
     () => getRaceSeriesByDate(schedule),
@@ -68,7 +75,9 @@ function CalendarPageContent() {
       <header className={styles.header}>
         <LogoPreview src={logoUrl} />
         <h1 className={styles.title}>{pageTitle}</h1>
-        <p className={styles.subtitle}>{pageSubtitle}</p>
+        <p className={styles.broadcastDay}>
+          {formatBroadcastDayLabel(broadcastDay)}
+        </p>
       </header>
 
       <main className={styles.main}>

@@ -22,6 +22,14 @@ describe("getRacesByMonth", () => {
     const races = getRacesByMonth(fixture, 2026, 1);
     expect(races).toHaveLength(0);
   });
+
+  it("should return july races when month is 7", () => {
+    const races = getRacesByMonth(fixture, 2026, 7);
+    expect(races).toHaveLength(4);
+    expect(races[1].title).toBe("【沪上龙门赛S2】【20260710】积分赛Day16");
+    expect(races[1].replayUrl).toBe("https://b23.tv/cl7dWMb");
+    expect(races[3].replayUrl).toBe("https://b23.tv/94Y3upj");
+  });
 });
 
 describe("getRaceDates", () => {

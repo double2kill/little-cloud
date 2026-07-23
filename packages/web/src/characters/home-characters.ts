@@ -13,7 +13,6 @@ export interface HomeNavCharacter {
   id: string;
   path: string;
   title: string;
-  subtitle: string;
   logoUrl: string;
   logoAlt: string;
   accent: string;
@@ -25,7 +24,6 @@ export const HOME_NAV_CHARACTERS: HomeNavCharacter[] = [
     id: laniConfig.id,
     path: ROUTE_PATH_LANI,
     title: laniConfig.pageTitle,
-    subtitle: laniConfig.pageSubtitle,
     logoUrl: laniConfig.logoUrl,
     logoAlt: laniConfig.logoAlt,
     accent: LANI_CARD_ACCENT,
@@ -35,7 +33,6 @@ export const HOME_NAV_CHARACTERS: HomeNavCharacter[] = [
     id: crystalConfig.id,
     path: ROUTE_PATH_CRYSTAL,
     title: crystalConfig.pageTitle,
-    subtitle: crystalConfig.pageSubtitle,
     logoUrl: crystalConfig.logoUrl,
     logoAlt: crystalConfig.logoAlt,
     accent: CRYSTAL_COLOR_PRIMARY,

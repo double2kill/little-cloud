@@ -30,7 +30,6 @@ export function CharacterCard({ character }: CharacterCardProps) {
       </div>
       <div className={styles.content}>
         <h2 className={styles.title}>{character.title}</h2>
-        <p className={styles.subtitle}>{character.subtitle}</p>
         <span className={styles.enter}>{HOME_CARD_ENTER_LABEL}</span>
       </div>
     </Link>

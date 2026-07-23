@@ -29,11 +29,14 @@
   background-clip: text;
 }
 
-.subtitle {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  font-weight: 600;
+.broadcastDay {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--huxiao);
   text-align: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--huxiao-soft);
 }
 
 .main {

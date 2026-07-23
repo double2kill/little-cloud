@@ -10,8 +10,8 @@ describe("crystalSchedule", () => {
     expect(exportedCrystalSchedule).toEqual(fixture);
   });
 
-  it("should have six races when crystal schedule loaded", () => {
-    expect(fixture.races).toHaveLength(6);
+  it("should have nine races when crystal schedule loaded", () => {
+    expect(fixture.races).toHaveLength(9);
   });
 
   it("should include huashan race when crystal schedule loaded", () => {
@@ -20,5 +20,12 @@ describe("crystalSchedule", () => {
     );
     expect(huashanRace?.series).toBe(RACE_SERIES.HUASHAN);
     expect(huashanRace?.replayUrl).toBe("https://b23.tv/Ou30yVQ");
+  });
+
+  it("should include day17 race when crystal schedule loaded", () => {
+    const race = fixture.races.find((item) => item.date === "2026-07-11");
+    expect(race?.title).toBe("【沪上龙门赛S2】【20260711】积分赛Day17");
+    expect(race?.replayUrl).toBe("https://b23.tv/KXKgwzs");
+    expect(race?.series).toBe(RACE_SERIES.HULONG);
   });
 });
