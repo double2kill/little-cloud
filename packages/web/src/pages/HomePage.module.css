@@ -41,3 +41,18 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.gamesLink {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+}

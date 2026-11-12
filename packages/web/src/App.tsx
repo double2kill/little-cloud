@@ -1,15 +1,22 @@
 import { Routes, Route } from "react-router-dom";
 import { CalendarPage } from "./pages/CalendarPage";
+import { GamesPage } from "./pages/GamesPage";
 import { HomePage } from "./pages/HomePage";
 import { laniConfig } from "./characters/lani";
 import { crystalConfig } from "./characters/crystal";
 import {
   ROUTE_PATH_CRYSTAL,
+  ROUTE_PATH_GAMES,
   ROUTE_PATH_HOME,
   ROUTE_PATH_LANI,
 } from "./routes";
 
-export { ROUTE_PATH_CRYSTAL, ROUTE_PATH_HOME, ROUTE_PATH_LANI } from "./routes";
+export {
+  ROUTE_PATH_CRYSTAL,
+  ROUTE_PATH_GAMES,
+  ROUTE_PATH_HOME,
+  ROUTE_PATH_LANI,
+} from "./routes";
 
 export function App() {
   return (
@@ -23,6 +30,7 @@ export function App() {
         path={ROUTE_PATH_CRYSTAL}
         element={<CalendarPage config={crystalConfig} />}
       />
+      <Route path={ROUTE_PATH_GAMES} element={<GamesPage />} />
     </Routes>
   );
 }

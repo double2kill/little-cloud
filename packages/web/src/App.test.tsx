@@ -2,7 +2,12 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import { App, ROUTE_PATH_CRYSTAL, ROUTE_PATH_LANI } from "./App";
+import {
+  App,
+  ROUTE_PATH_CRYSTAL,
+  ROUTE_PATH_GAMES,
+  ROUTE_PATH_LANI,
+} from "./App";
 import { laniConfig, LANI_DEBUT_DATE } from "./characters/lani";
 import {
   crystalConfig,
@@ -17,6 +22,7 @@ import {
   REPLAY_LINK_LABEL,
   SELECT_DATE_HINT,
 } from "./constants";
+import { GAMES_PAGE_TITLE } from "./games/constants";
 import { getBroadcastDay } from "./utils/broadcast-day";
 
 function renderAt(path: string) {
@@ -103,6 +109,11 @@ describe("App", () => {
     expect(document.body.classList.contains(crystalConfig.themeClass)).toBe(
       true,
     );
+  });
+
+  it("should render games title when mounted at games route", () => {
+    renderAt(ROUTE_PATH_GAMES);
+    expect(screen.getByRole("heading", { name: GAMES_PAGE_TITLE })).toBeInTheDocument();
   });
 
   it("should set crystal favicon when mounted at crystal route", () => {

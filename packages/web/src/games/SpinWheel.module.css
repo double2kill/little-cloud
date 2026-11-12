@@ -1,0 +1,120 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.stage {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin-top: 8px;
+}
+
+.pointer {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 18px solid var(--huxiao);
+  filter: drop-shadow(0 2px 4px rgba(255, 107, 138, 0.35));
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid var(--surface-solid);
+  box-shadow: var(--shadow-soft);
+  transition: transform cubic-bezier(0.12, 0.7, 0.15, 1);
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  margin-left: -36px;
+  margin-top: -10px;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text);
+  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result {
+  min-height: 1.75rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.spin {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font: inherit;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--title-gradient-start) 0%,
+    var(--title-gradient-end) 100%
+  );
+  cursor: pointer;
+}
+
+.spin:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.hint {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface-solid);
+}
+
+.warning {
+  width: 100%;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--huxiao);
+  text-align: center;
+}

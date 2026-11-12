@@ -1,7 +1,10 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { CharacterCard } from "../components/CharacterCard";
 import { HOME_NAV_CHARACTERS } from "../characters/home-characters";
 import { HOME_PAGE_SUBTITLE, HOME_PAGE_TITLE } from "../constants";
+import { GAMES_PAGE_TITLE } from "../games/constants";
+import { ROUTE_PATH_GAMES } from "../routes";
 import styles from "./HomePage.module.css";
 
 export function HomePage() {
@@ -21,6 +24,10 @@ export function HomePage() {
           <CharacterCard key={character.id} character={character} />
         ))}
       </nav>
+
+      <Link className={styles.gamesLink} to={ROUTE_PATH_GAMES}>
+        {GAMES_PAGE_TITLE}
+      </Link>
     </div>
   );
 }
